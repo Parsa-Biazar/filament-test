@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use function Laravel\Prompts\select;
 
 class UserResource extends Resource
 {
@@ -24,9 +25,12 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('email')->email()->required(),
-            ])->columns('2');
+                Forms\Components\Card::make()->schema([
+                    Forms\Components\TextInput::make('name')->required(),
+                    Forms\Components\TextInput::make('email')->email()->required(),
+                ])->columns('2'),
+            Forms\Components\Select::make('categories')->relationship('categories','title')->multiple()->preload()->required(),
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -55,7 +59,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CategoriesRelationManager::class,
+//            CategoriesRelationManager::class,
         ];
     }
 
