@@ -30,14 +30,14 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
-            'password' => bcrypt('123456'),
+            'password' => Hash::make('123456'),
         ]);
 
         // ایجاد کاربر ادمین
         \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
-            'password' => bcrypt('123456'),
+            'password' => Hash::make('123456'),
         ]);
 
     }
