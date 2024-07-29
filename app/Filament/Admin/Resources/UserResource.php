@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\UserResource\Pages;
 use App\Filament\Admin\Resources\UserResource\RelationManagers;
+use App\Filament\Admin\Resources\UserResource\RelationManagers\CategoriesRelationManager;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -25,16 +26,14 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\TextInput::make('email')->email()->required(),
-                Forms\Components\TextInput::make('password')->required(),
-            ])->columns('3');
+            ])->columns('2');
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                ->label("sd"),
+                Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('email'),
             ])
             ->filters([
@@ -53,7 +52,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CategoriesRelationManager::class,
         ];
     }
 

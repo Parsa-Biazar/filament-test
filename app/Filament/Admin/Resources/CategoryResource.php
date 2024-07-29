@@ -26,9 +26,7 @@ class CategoryResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('color')
-                    ->required()
-                    ->maxLength(191),
+                Forms\Components\ColorPicker::make('color'),
             ]);
     }
 
